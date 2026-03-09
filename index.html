@@ -1,0 +1,467 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaurav Bhardwaj | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8f4ec;
+      --bg-soft: #fffaf1;
+      --surface: #fffdf8;
+      --text: #20231f;
+      --muted: #5c655d;
+      --accent: #de5d2f;
+      --accent-2: #f1b34a;
+      --line: #ddd2c3;
+      --shadow: 0 18px 36px rgba(43, 35, 25, 0.1);
+      --radius: 18px;
+    }
+
+    body.dark {
+      --bg: #121515;
+      --bg-soft: #171d1d;
+      --surface: #1d2524;
+      --text: #edf2ef;
+      --muted: #b6c1bc;
+      --accent: #ff7a45;
+      --accent-2: #f5c761;
+      --line: #2e3a38;
+      --shadow: 0 18px 36px rgba(0, 0, 0, 0.33);
+      background: linear-gradient(120deg, #0f1313 0%, #18201f 40%, #202724 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Sora", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(120deg, #f8f4ec 0%, #fff5eb 40%, #fff8f2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.65;
+      transition: background 250ms ease, color 250ms ease;
+    }
+
+    .bg-orb { position: fixed; z-index: -1; border-radius: 50%; filter: blur(24px); opacity: 0.42; animation: drift 18s ease-in-out infinite alternate; }
+    .orb-1 { width: 340px; height: 340px; top: -80px; left: -70px; background: #f6b088; }
+    .orb-2 { width: 280px; height: 280px; right: -80px; top: 18%; background: #f6d693; animation-delay: 3s; }
+    .orb-3 { width: 320px; height: 320px; left: 28%; bottom: -140px; background: #f7b6a4; animation-delay: 6s; }
+    @keyframes drift { from { transform: translateY(0) translateX(0) scale(1); } to { transform: translateY(-20px) translateX(24px) scale(1.08); } }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; gap: 1rem; }
+    .logo { font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3px; }
+    .nav-actions { display: flex; align-items: center; gap: 0.6rem; position: relative; }
+    .nav-links { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-weight: 600; position: relative; padding-bottom: 4px; font-size: 0.92rem; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform 250ms ease; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .theme-toggle { border: 1px solid var(--line); background: var(--surface); color: var(--text); padding: 0.5rem 0.75rem; border-radius: 999px; cursor: pointer; font-weight: 600; }
+    .nav-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    section { padding: 3.6rem 0; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.2; }
+    h2 { font-size: 1.9rem; margin-bottom: 1rem; position: relative; width: fit-content; }
+    h2::after { content: ""; position: absolute; left: 0; bottom: -8px; width: 72%; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), transparent); }
+
+    .hero { padding-top: 5rem; display: grid; grid-template-columns: 1.25fr 1fr; gap: 1.4rem; align-items: center; }
+    .eyebrow { display: inline-block; padding: 0.35rem 0.75rem; border-radius: 999px; background: color-mix(in srgb, var(--accent) 15%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line)); color: color-mix(in srgb, var(--accent) 80%, var(--text)); font-size: 0.85rem; margin-bottom: 1rem; animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    .hero h1 { font-size: clamp(2.1rem, 4vw, 3.4rem); margin-bottom: 1rem; }
+    .hero h1 .grad { background: linear-gradient(95deg, #a93f1a, #e36233, #b75f0d); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 200%; animation: shimmer 6s linear infinite; }
+    @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+    .hero p { color: var(--muted); max-width: 60ch; margin-bottom: 1.3rem; }
+
+    .btns { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .btn { border: none; border-radius: 999px; font-weight: 600; padding: 0.78rem 1.05rem; cursor: pointer; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(90deg, var(--accent), #f37b45); color: #fff; box-shadow: 0 10px 22px rgba(222, 93, 47, 0.3); }
+    .btn-outline { border: 1px solid var(--line); color: var(--text); background: var(--surface); }
+
+    .hero-card { background: color-mix(in srgb, var(--surface) 90%, transparent); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); transform-style: preserve-3d; transition: transform 200ms ease; }
+    .hero-card h3 { margin-bottom: 0.55rem; }
+    .hero-card ul { list-style: none; color: var(--muted); }
+    .hero-card li + li { margin-top: 0.45rem; }
+
+    .stats { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+    .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 0.9rem; text-align: center; }
+    .stat .num { font-family: "Space Grotesk", sans-serif; font-size: 1.4rem; font-weight: 700; color: color-mix(in srgb, var(--accent) 78%, var(--text)); }
+    .stat .label { color: var(--muted); font-size: 0.84rem; }
+
+    .about p { max-width: 75ch; color: var(--muted); }
+    .stack { display: grid; gap: 1rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .chip { background: color-mix(in srgb, var(--accent) 14%, var(--surface)); color: color-mix(in srgb, var(--accent) 70%, var(--text)); border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line)); border-radius: 999px; padding: 0.4rem 0.72rem; font-size: 0.88rem; font-weight: 600; transition: transform 160ms ease, background 160ms ease; }
+    .chip:hover { transform: translateY(-3px); }
+
+    .timeline { display: grid; gap: 1rem; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 12px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--accent), transparent); opacity: 0.5; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; box-shadow: 0 10px 24px rgba(42, 35, 24, 0.07); position: relative; margin-left: 1.8rem; transition: transform 180ms ease, box-shadow 180ms ease; }
+    .card::before { content: ""; position: absolute; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); left: -1.52rem; top: 1.2rem; box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 20%, transparent); }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card h3 { margin-bottom: 0.35rem; font-size: 1.12rem; }
+    .card p, .card li { color: var(--muted); font-size: 0.95rem; }
+    .card ul { padding-left: 1.1rem; margin-top: 0.55rem; }
+
+    .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .project-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; box-shadow: 0 10px 24px rgba(42, 35, 24, 0.07); transition: transform 180ms ease; }
+    .project-card:hover { transform: translateY(-4px); }
+    .thumb {
+      height: 165px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+      margin-bottom: 0.85rem;
+      position: relative;
+      overflow: hidden;
+      background-size: 220% 220%;
+      animation: panbg 10s ease-in-out infinite alternate;
+    }
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 255, 255, 0.03) 10px,
+        rgba(255, 255, 255, 0.03) 20px
+      );
+      animation: shimmerLine 3s linear infinite;
+    }
+    .thumb-1 { background-image: linear-gradient(120deg, #f39d7a, #ffd2a5, #f08368); }
+    .thumb-2 { background-image: linear-gradient(120deg, #8fd3c9, #b8e6a8, #7ec4df); }
+    .thumb-3 { background-image: linear-gradient(120deg, #d6b0ff, #ffc2cc, #a8c4ff); }
+    .thumb-4 { background-image: linear-gradient(120deg, #f7d175, #f3a683, #f5c7a4); }
+
+    @keyframes panbg {
+      from { background-position: 0% 0%; }
+      to { background-position: 100% 100%; }
+    }
+    @keyframes shimmerLine {
+      from { transform: translateX(-10%); }
+      to { transform: translateX(10%); }
+    }
+
+    .contact-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem; max-width: 720px; box-shadow: 0 8px 20px rgba(42, 35, 24, 0.08); }
+    .contact-box p { color: var(--muted); margin-bottom: 1rem; }
+    .contact-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 500ms ease, transform 500ms ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    footer { padding: 1.4rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.93rem; }
+
+
+    .back-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 120;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.6rem 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .back-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .timeline::before, .card::before { display: none; }
+      .card { margin-left: 0; }
+      .project-grid { grid-template-columns: 1fr; }
+      .nav-toggle { display: inline-flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        min-width: 220px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 0.7rem;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .nav-links.open { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Gaurav Bhardwaj</div>
+        <div class="nav-actions">
+          <ul class="nav-links" id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button class="theme-toggle" id="theme-toggle">Toggle Theme</button>
+          <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero reveal">
+      <div>
+        <span class="eyebrow">Open to Full-Time SDE Roles</span>
+        <h1>Building <span class="grad">cloud microservices</span> and scalable APIs with Java, Spring Boot, and AWS.</h1>
+        <p>Senior Software Engineer experienced in backend modernization, AWS architecture, and high-impact product delivery.</p>
+        <div class="btns">
+          <a class="btn btn-primary" href="#experience">View Experience</a>
+          <a class="btn btn-outline" href="./Resume_Gaurav_Bhardwaj.pdf" download>Download Resume</a>
+          <a class="btn btn-outline" href="#contact">Contact Me</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="num" data-count="4">0</div><div class="label">Years of Experience</div></div>
+          <div class="stat"><div class="num" data-count="3500000">0</div><div class="label">Annual Cost Saved (USD)</div></div>
+          <div class="stat"><div class="num" data-count="3">0</div><div class="label">Weeks Release Cycle</div></div>
+        </div>
+      </div>
+      <aside class="hero-card" id="tilt-card">
+        <h3>At a glance</h3>
+        <ul>
+          <li>Role: Senior Software Engineer</li>
+          <li>Primary Stack: Java, Spring Boot, AWS</li>
+          <li>Email: hi2gauravgb@gmail.com</li>
+          <li>Phone: +91-9755257295</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="about" class="about reveal">
+      <h2>About</h2>
+      <p>Seasoned Software Engineer proficient in developing cloud-based microservices and APIs. I focus on resilient backend architectures, strong system design, and performance-driven engineering that improves delivery speed and production reliability.</p>
+    </section>
+
+    <section id="skills" class="reveal">
+      <h2>Skills</h2>
+      <div class="stack">
+        <div><h3>Technical Skills</h3><div class="skills"><span class="chip">Microservices</span><span class="chip">Spring Boot</span><span class="chip">AWS</span><span class="chip">RDBMS</span><span class="chip">Back-End</span><span class="chip">DSA</span><span class="chip">Linux</span><span class="chip">Spring Security</span><span class="chip">JUnit</span></div></div>
+        <div><h3>Languages</h3><div class="skills"><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">Python</span></div></div>
+        <div><h3>Tools</h3><div class="skills"><span class="chip">IntelliJ IDEA</span><span class="chip">Eclipse</span><span class="chip">GitLab</span><span class="chip">SQL Developer</span><span class="chip">Splunk</span><span class="chip">Dynatrace</span><span class="chip">SonarQube</span></div></div>
+        <div><h3>Soft Skills</h3><div class="skills"><span class="chip">Leadership</span><span class="chip">Critical Thinking</span><span class="chip">Problem Solving</span><span class="chip">Mentoring</span></div></div>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <article class="card">
+          <h3>Senior Software Engineer</h3>
+          <p><strong>Cummins Modernization, Tata Consultancy Services</strong></p>
+          <p>November 2021 - Current</p>
+          <ul>
+            <li>Developed RESTful APIs using Java and Spring Boot to enable seamless backend integration and improved user experience.</li>
+            <li>Migrated services and data from mainframe to AWS microservices architecture, achieving 100% latency reduction and 200% downtime reduction.</li>
+            <li>Deployed AWS services including EC2, S3, RDS, Lambda, and CloudWatch to run a highly scalable backend system.</li>
+            <li>Led automation of engine specification quote generation, reducing release timelines from 4 months to 3 weeks and saving $3.5 million annually.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Software Engineer</h3>
+          <p><strong>Trane Technologies, Tata Consultancy Services</strong></p>
+          <p>June 2021 - October 2021</p>
+          <ul>
+            <li>Designed ER diagrams to align database structures with business requirements and maintain data integrity.</li>
+            <li>Migrated OracleDB to MySQL with minimal downtime, reducing transition time by 40% and improving response time by 50%.</li>
+            <li>Built efficient ETL workflows for integrating data from multiple sources using SQL-driven processing.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="thumb thumb-1"></div>
+          <h3>Students Record Management System</h3>
+          <p><strong>Academic Project | November 2020</strong></p>
+          <p>Built a complete dashboard for student and faculty management using Java, Spring Boot, MySQL, HTML, CSS, and JavaScript.</p>
+        </article>
+        <article class="project-card">
+          <div class="thumb thumb-2"></div>
+          <h3>AWS Modernization Initiative</h3>
+          <p><strong>Professional Work</strong></p>
+          <p>Mainframe-to-microservices migration using AWS services and Spring Boot with major improvements in reliability and latency.</p>
+        </article>
+        <article class="project-card">
+          <div class="thumb thumb-3"></div>
+          <h3>Quote Automation Engine</h3>
+          <p><strong>Professional Work</strong></p>
+          <p>Automated engine specification quote generation to accelerate product release cycles and reduce manual dependencies.</p>
+        </article>
+        <article class="project-card">
+          <div class="thumb thumb-4"></div>
+          <h3>Oracle to MySQL Migration</h3>
+          <p><strong>Professional Work</strong></p>
+          <p>Planned and executed low-downtime migration and query optimization for better performance and operational continuity.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <h2>Contact</h2>
+      <div class="contact-box">
+        <p>I am open to full-time SDE opportunities. Reach out anytime.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:hi2gauravgb@gmail.com">Email</a>
+          <a class="btn btn-outline" href="tel:+919755257295">Call</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/gauravbhardwaj97/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn btn-outline" href="https://github.com/hi2gaurav" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-outline" href="./Resume_Gaurav_Bhardwaj.pdf" download>Resume PDF</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Gaurav Bhardwaj. Portfolio website.</div>
+  </footer>
+
+
+  <button id="back-to-top" class="back-top" aria-label="Back to top">Top</button>
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    revealEls.forEach((el) => observer.observe(el));
+
+    const countEls = document.querySelectorAll('.num');
+    const formatNum = (n) => {
+      if (n >= 1000000) return '$' + (n / 1000000).toFixed(1).replace('.0', '') + 'M+';
+      return n + '+';
+    };
+    const animateCount = (el) => {
+      const target = Number(el.getAttribute('data-count'));
+      const duration = 1400;
+      const start = performance.now();
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const value = Math.floor(target * (1 - Math.pow(1 - progress, 3)));
+        el.textContent = formatNum(value);
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    };
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    countEls.forEach((el) => statObserver.observe(el));
+
+    const tiltCard = document.getElementById('tilt-card');
+    if (tiltCard) {
+      tiltCard.addEventListener('mousemove', (e) => {
+        const rect = tiltCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -6;
+        const ry = ((x / rect.width) - 0.5) * 8;
+        tiltCard.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      tiltCard.addEventListener('mouseleave', () => {
+        tiltCard.style.transform = 'rotateX(0) rotateY(0)';
+      });
+    }
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const storedTheme = localStorage.getItem('portfolio-theme');
+    if (storedTheme === 'dark') document.body.classList.add('dark');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const mode = document.body.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('portfolio-theme', mode);
+    });
+
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        if (!target.closest('.nav-actions')) {
+          navLinks.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    const backTop = document.getElementById('back-to-top');
+    if (backTop) {
+      window.addEventListener('scroll', () => {
+        backTop.classList.toggle('show', window.scrollY > 280);
+      });
+      backTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
